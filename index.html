@@ -1,0 +1,74 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Caixu Preview</title>
+<style>
+:root{--bg:#E4DED3;--ink:#2B2723;--muted:#6F685F;--line:#D3CBBE;--card:#F4F0E8;--accent:#C9472F}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1E1C1A;--ink:#EEE9E0;--muted:#A39B90;--line:#3A3632;--card:#2A2724;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#1E1C1A;--ink:#EEE9E0;--muted:#A39B90;--line:#3A3632;--card:#2A2724;color-scheme:dark}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{background:var(--bg);color:var(--ink);font-family:Inter,'PingFang SC','Noto Sans SC',system-ui,sans-serif;display:flex;overflow:hidden}
+#side{width:250px;padding-left:max(20px,env(safe-area-inset-left,0px));flex:none;height:100%;overflow:auto;padding:22px 14px 30px 20px;border-right:1px solid var(--line)}
+#side h1{font:600 18px/1.2 Fraunces,'Noto Serif SC',serif;margin:0 0 4px}
+#side p{font-size:12px;color:var(--muted);margin:0 0 16px;line-height:1.5}
+#side .g{font-size:11px;letter-spacing:.08em;color:var(--muted);margin:14px 0 6px}
+#side button{display:flex;gap:8px;width:100%;text-align:left;border:0;background:none;color:inherit;font:inherit;font-size:14px;padding:7px 10px;border-radius:9px;cursor:pointer}
+#side button i{font-style:normal;color:var(--muted);width:22px;font-size:12px;padding-top:1px}
+#side button:hover{background:var(--card)}
+#side button.on{background:var(--ink);color:var(--bg)}
+#side button.on i{color:inherit;opacity:.7}
+#side .close{display:none}
+#main{flex:1;display:flex;align-items:center;justify-content:center;position:relative;min-width:0}
+#phone{width:390px;height:844px;position:relative;border-radius:54px;overflow:hidden;isolation:isolate;-webkit-user-select:none;user-select:none;background:#EEE9E0;box-shadow:0 0 0 10px #191715,0 0 0 11px #3a3631,0 40px 80px -20px rgba(0,0,0,.45);transform-origin:center center;flex:none}
+.scr{position:absolute;inset:0;background:#EEE9E0;will-change:transform}
+.scr.dim::after{content:"";position:absolute;inset:0;background:rgba(20,15,10,.0);pointer-events:none}
+#bar{position:absolute;left:0;right:0;bottom:14px;display:flex;justify-content:center;gap:10px;pointer-events:none}
+#bar button{pointer-events:auto;border:1px solid var(--line);background:var(--card);color:var(--ink);font:500 13px Inter,'PingFang SC',sans-serif;padding:8px 14px;border-radius:20px;cursor:pointer}
+#hint{position:absolute;top:16px;left:0;right:0;text-align:center;font-size:12px;color:var(--muted)}
+#toast{position:absolute;left:50%;top:104px;transform:translateX(-50%);background:rgba(43,39,35,.78);backdrop-filter:blur(20px) saturate(1.6);-webkit-backdrop-filter:blur(20px) saturate(1.6);color:#FAF8F4;font:500 14px Inter,'PingFang SC',sans-serif;padding:11px 18px;border-radius:22px;opacity:0;pointer-events:none;z-index:95;white-space:nowrap;max-width:350px;overflow:hidden;text-overflow:ellipsis;box-shadow:0 10px 30px -10px rgba(0,0,0,.35)}
+#tabbar{position:absolute;left:50%;bottom:30px;transform:translate(-50%,0);width:300px;height:64px;padding:6px;display:flex;border-radius:32px;z-index:80;
+  background:rgba(255,255,255,.14);backdrop-filter:blur(14px) saturate(1.9) brightness(1.04);-webkit-backdrop-filter:blur(14px) saturate(1.9) brightness(1.04);
+  box-shadow:0 0 0 .5px rgba(255,255,255,.6) inset,0 1px 0 rgba(255,255,255,.7) inset,0 -1px 0 rgba(0,0,0,.03) inset,0 12px 32px -12px rgba(40,30,20,.28),0 0 0 .5px rgba(60,50,40,.08)}
+#tabbar button{position:relative;z-index:1;flex:1;height:52px;border:0;background:none;display:grid;place-items:center;color:rgba(43,39,35,.55);cursor:pointer;transition:color .3s;-webkit-tap-highlight-color:transparent}
+#tabbar button.on{color:#2B2723}
+#tabbar .av{width:30px;height:30px;border-radius:15px;overflow:hidden;box-shadow:0 0 0 1.5px rgba(255,255,255,.9);opacity:.8;transition:opacity .3s, box-shadow .3s}
+#tabbar button.on .av{opacity:1;box-shadow:0 0 0 2px #2B2723}
+#tabbar .av img{width:100%;height:100%;object-fit:cover;object-position:50% 20%}
+#tabbar .bd{position:absolute;top:12px;right:22px;width:8px;height:8px;border-radius:4px;background:#E5484D;box-shadow:0 0 0 1.5px rgba(255,255,255,.8)}
+#cap{position:absolute;left:0;top:6px;height:52px;width:70px;border-radius:26px;background:rgba(255,255,255,.55);box-shadow:0 1px 3px rgba(40,30,20,.1),0 0 0 .5px rgba(255,255,255,.9) inset;transform-origin:center}
+#edge{position:absolute;left:0;top:0;bottom:0;width:22px;z-index:70;touch-action:none}
+#menuBtn{display:none}
+@media (max-width:760px){
+  body{display:block;overflow:hidden;background:#EEE9E0}
+  #side{position:fixed;inset:0;width:auto;z-index:100;background:var(--bg);transform:translateX(-100%);transition:transform .3s}
+  body.menu #side{transform:none}
+  #main{position:fixed;left:0;right:0;top:env(safe-area-inset-top,0px);bottom:env(safe-area-inset-bottom,0px)}
+  #phone{border-radius:0;box-shadow:none}
+  #bar,#hint{display:none}
+  #menuBtn{display:block;position:fixed;left:50%;transform:translateX(-50%);top:calc(env(safe-area-inset-top) + 8px);z-index:90;border:0;border-radius:14px;background:#191715;color:#fff;font:500 11px Inter,'PingFang SC','Noto Sans SC',sans-serif;padding:7px 12px;white-space:nowrap;max-width:60vw;overflow:hidden;text-overflow:ellipsis}
+  #side .close{display:block;margin-top:16px;border:1px solid var(--line);justify-content:center;text-align:center}
+  body.menu #menuBtn{display:none}
+}
+</style>
+<nav id="side"></nav>
+<div id="main">
+  <div id="hint">点按钮会跳转 · 从手机左边缘往右拖返回 · 左边可以直接选任意一屏</div>
+  <div id="phone"><div id="edge"></div>
+    <nav id="tabbar" aria-label="Tabs"><i id="cap"></i>
+      <button data-t="Home" aria-label="Journals"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M6.5 3.5h11a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2h-11a2 2 0 0 1-2-2v-13a2 2 0 0 1 2-2z"/><path d="M8.5 3.5v17" /><path d="M11.5 8h5M11.5 11h3.5" stroke-linecap="round"/></svg></button>
+      <button data-t="Studio" aria-label="Studio"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M20.5 12.5a8.5 8.5 0 1 1-9-9h1.2a7.8 7.8 0 0 0 7.8 7.8z"/><path d="M12.7 3.5c.2 4.7 3.1 7.6 7.8 7.8" /><path d="M12.7 3.5c-.4 2.9.3 5.4 2.1 6.9 1.6 1.4 3.6 1.4 5.7.9" fill="currentColor" fill-opacity=".14"/></svg></button>
+      <button data-t="Together" aria-label="Together"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="9" cy="8.5" r="3.2"/><path d="M3.5 19.5c.6-3.3 2.8-5.2 5.5-5.2s4.9 1.9 5.5 5.2"/><circle cx="16.5" cy="9.5" r="2.6"/><path d="M15.5 14.4c2.6-.3 4.6 1.4 5 4.6"/></svg><i class="bd"></i></button>
+      <button data-t="Profile" aria-label="Profile"><span class="av"><img src="img/p_palette.jpg" alt=""></span></button>
+    </nav>
+    <div id="toast"></div></div>
+  <div id="bar"><button id="backBtn">← 返回</button><button id="homeBtn">回到手账首页</button></div>
+</div>
+<button id="menuBtn">目录</button>
+<script src="fonts.js" charset="utf-8"></script>
+<script src="screens.js" charset="utf-8"></script>
+<script src="custom.js" charset="utf-8"></script>
+<script src="style.js" charset="utf-8"></script>
+<script src="page.js" charset="utf-8"></script>
+<script src="nav.js" charset="utf-8"></script>
+<script src="app.js" charset="utf-8"></script>
+
+</body></html>
